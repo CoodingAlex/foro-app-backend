@@ -49,6 +49,21 @@ class MongoLib {
       throw new Error(`Error finding the data`)
     }
   }
+  async findOne(collection, query) {
+    if (!this.connected) {
+      await this.connect()
+    }
+    try {
+      const data = await this.db.collection(collection).findOne(query)
+
+      return data
+    } catch (err) {
+      console.log(err)
+
+      debug('Error in the query')
+      throw new Error(`Error finding the data`)
+    }
+  }
   async insertOne(collection, body) {
     if (!this.connected) {
       await this.connect()
@@ -59,8 +74,42 @@ class MongoLib {
     } catch (err) {
       console.log(err)
 
-      debug('Error in the query')
-      throw new Error(`Error finding the data`)
+      debug('Error creating')
+      throw new Error(`Error creating the data`)
+    }
+  }
+
+  async updateOne(collection, id, data) {
+    if (!this.connected) {
+      await this.connect()
+    }
+    try {
+      const updated = await this.db
+        .collection(collection)
+        .updateOne({ _id: ObjectId(id) }, { $set: data }, { upsert: true })
+
+      return updated
+    } catch (err) {
+      console.log(err)
+
+      debug('Error updating')
+      throw new Error(`Error updating the data`)
+    }
+  }
+
+  async removeOne(collection, query) {
+    if (!this.connected) {
+      await this.connect()
+    }
+
+    try {
+      const data = await this.db.collection(collection).deleteOne(query)
+      return data
+    } catch (err) {
+      console.log(err)
+
+      debug('Error deleting')
+      throw new Error(`Error deleting the data`)
     }
   }
 }
