@@ -15,8 +15,7 @@ class PostsService {
   }
   async createPost(post) {
     try {
-      const createdPost = await (await db.insertOne(COLLECTION, post)).ops[0]
-      console.log(createdPost)
+      const createdPost = await await db.insertOne(COLLECTION, post)
 
       return createdPost
     } catch (err) {

@@ -69,7 +69,8 @@ class MongoLib {
       await this.connect()
     }
     try {
-      const data = await this.db.collection(collection).insertOne(body)
+      const data = await (await this.db.collection(collection).insertOne(body))
+        .ops[0]
       return data
     } catch (err) {
       console.log(err)
@@ -86,9 +87,13 @@ class MongoLib {
     try {
       const updated = await this.db
         .collection(collection)
-        .updateOne({ _id: ObjectId(id) }, { $set: data }, { upsert: true })
+        .findOneAndUpdate(
+          { _id: ObjectId(id) },
+          { $set: data },
+          { upsert: true }
+        )
 
-      return updated
+      return updated.value
     } catch (err) {
       console.log(err)
 

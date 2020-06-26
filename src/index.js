@@ -12,6 +12,7 @@ const chalk = require('chalk')
 //Routes
 const usersRouter = require('./routes/users')
 const postsRouter = require('./routes/posts')
+const commentsRouter = require('./routes/comments')
 
 //middlewares
 
@@ -20,7 +21,7 @@ app.use(express.json())
 //router
 postsRouter(app)
 usersRouter(app)
-
+commentsRouter(app)
 //error middlewares
 
 app.use(errorLogger)
