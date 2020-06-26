@@ -33,6 +33,7 @@ function postsRouter(app) {
     try {
       debug('request to POST /api/posts/')
       const post = req.body
+
       const { _id, title } = await postsService.createPost(post)
       res
         .status(201)
@@ -46,6 +47,7 @@ function postsRouter(app) {
       debug('request to PUT /api/posts/:postId')
       const { postId } = req.params
       const post = req.body
+
       const updatedPost = await postsService.updatePost(postId, post)
       res.status(200).json({ message: 'post updated', data: updatedPost })
     } catch (err) {
