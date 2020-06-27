@@ -6,6 +6,8 @@
 
 ## /api/users
 
+## /api/comments
+
 # Methods
 
 ## Get
