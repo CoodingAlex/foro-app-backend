@@ -49,6 +49,7 @@ class MongoLib {
       throw new Error(`Error finding the data`)
     }
   }
+
   async findOne(collection, query) {
     if (!this.connected) {
       await this.connect()
@@ -64,6 +65,7 @@ class MongoLib {
       throw new Error(`Error finding the data`)
     }
   }
+
   async insertOne(collection, body) {
     if (!this.connected) {
       await this.connect()

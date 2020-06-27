@@ -1,11 +1,21 @@
 const express = require('express')
 const router = express.Router()
 
-function usersRouter(app) {
-  app.use('/users', router)
+const UsersService = require('../services/UsersService')
+const usersService = new UsersService()
 
-  router.get('/', (req, res, next) => {
-    res.json({ hello: 'world' })
+function usersRouter(app) {
+  app.use('/api/users', router)
+
+  router.get('/:userId', async (req, res, next) => {
+    try {
+      const { userId } = req.params
+      const data = await usersService.getUserById(userId)
+
+      res.json({ message: 'user getted', data })
+    } catch (err) {
+      next(err)
+    }
   })
 }
 

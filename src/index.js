@@ -13,6 +13,7 @@ const chalk = require('chalk')
 const usersRouter = require('./routes/users')
 const postsRouter = require('./routes/posts')
 const commentsRouter = require('./routes/comments')
+const authRouter = require('./routes/auth')
 
 //middlewares
 
@@ -22,6 +23,7 @@ app.use(express.json())
 postsRouter(app)
 usersRouter(app)
 commentsRouter(app)
+authRouter(app)
 //error middlewares
 
 app.use(errorLogger)
