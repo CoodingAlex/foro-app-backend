@@ -1,13 +1,5 @@
 # foro-app-backend
 
-### Basic routes
-
-FORMAT: 1A
-
-# Encuestas
-
-Encuestas es una API que permite a los clientes ver encuestas y votar en ellas.
-
 # Endpoints
 
 ## /api/posts
